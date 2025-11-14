@@ -9,13 +9,16 @@ export const buscarClientes = async () => {
 
   // Loop para buscar todas as páginas
   do {
-    const response = await fetch(`${baseUrl}/customer/list?page=${page}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-    });
+    const response = await fetch(
+      `${baseUrl}/customer/list?page=${page}&show_custom_fields=1`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+      }
+    );
     const data = await response.json();
     clientes.push(...data.data);
     page = data.next_page;

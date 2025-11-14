@@ -14,9 +14,9 @@ export interface Cliente {
   };
   creation_date: string | undefined;
   custom_fields: Array<{
-    field_id: string | undefined;
-    field_name: string | undefined;
-    value: string | undefined;
+    id: string;
+    name: string;
+    value: string;
   }> | null;
 }
 
@@ -25,4 +25,23 @@ export interface ClienteResponse {
   message: string | null;
   data: Cliente[] | null;
   success: boolean;
+}
+
+export interface Fatura {
+  id: string;
+  category: {
+    id: string | null;
+    name: string | null;
+  };
+  customFields: {
+    data: string;
+    horaInicio: string;
+    horaFinalizada: string;
+    servicoExecutado: string;
+    utilizouMaterial: string;
+    horasTrabalhadas: string;
+    valorTotal: string;
+  };
+  customer: Cliente;
+  ticket_type: string;
 }
