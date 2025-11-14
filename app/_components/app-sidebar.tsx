@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "./ui/sidebar";
-import { CogIcon, HomeIcon, LayoutTemplateIcon } from "lucide-react";
+import { CogIcon, DollarSignIcon, HomeIcon, LayoutTemplateIcon } from "lucide-react";
 import NavMain from "./nav-main";
 
 
@@ -23,6 +23,11 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
                 title: "Templates",
                 href: "/app/templates",
                 icon: LayoutTemplateIcon
+            },
+            {
+                title: "Gerar Fatura",
+                href: "/app/billing",
+                icon: DollarSignIcon
             }
 
         ],
