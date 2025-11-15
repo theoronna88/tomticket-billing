@@ -80,6 +80,7 @@ const BillingTemplate = ({
                 <th>Início</th>
                 <th>Fim</th>
                 <th>Descrição</th>
+                <th>Tipo de Chamado</th>
                 <th>Uso de Material</th>
                 <th>Horas</th>
                 <th>Valor Visita</th>
@@ -97,6 +98,7 @@ const BillingTemplate = ({
                     <td>{item.customFields.horaInicio}</td>
                     <td>{item.customFields.horaFinalizada}</td>
                     <td>{item.customFields.servicoExecutado}</td>
+                    <td>{item.department.name}</td>
                     <td>{item.customFields.utilizouMaterial}</td>
                     <td>{item.customFields.horasTrabalhadas}</td>
                     <td>{item.customFields.valorTotal}</td>

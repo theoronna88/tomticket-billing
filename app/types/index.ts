@@ -44,4 +44,8 @@ export interface Fatura {
   };
   customer: Cliente;
   ticket_type: string;
+  department: {
+    id: string | null;
+    name: string | null;
+  };
 }
