@@ -114,10 +114,17 @@ export const gerarFatura = async ({
             ? calculoDeHoras(horaInicio, horaFinalizada)
             : "0.00";
 
+        // TODO: Ajustar de acordo com a regra de négocio aplicada pelo cliente no TomTicket
+        // TODO: Acrescentar à tela Settings essa configuração para o cliente escolher
         // Determinar valor da visita baseado no ticket_type
-        const ticketType = batch[j].ticket_type;
+        // const ticketType = batch[j].ticket_type;
+        // const valorVisita =
+        // ticketType === "Externo" ? valorPresencial : valorRemoto;
+
+        // Determinar valor da visita baseado no departamento do chamado
+        const departament = batch[j].department.name;
         const valorVisita =
-          ticketType === "Externo" ? valorPresencial : valorRemoto;
+          departament === "Atendimento Remoto" ? valorRemoto : valorPresencial;
 
         // Calcular valor total do chamado
         const valorTotal = valorTotalChamado(
