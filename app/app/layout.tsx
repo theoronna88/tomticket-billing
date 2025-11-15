@@ -1,6 +1,7 @@
 import AppSidebar from "../_components/app-sidebar";
 import SiteHeader from "../_components/site-header";
 import { SidebarInset, SidebarProvider } from "../_components/ui/sidebar";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export default function Layout({
   children,
@@ -8,23 +9,25 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <SidebarProvider className="no-print">
-      <AppSidebar variant="inset" />
-      <SidebarInset>
-        <SiteHeader />
-        <div className="flex flex-1 flex-col">
-          <div className="@container/main flex flex-1 flex-col gap-2">
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              {/* Section cards, etc. */}
-              <div className="px-4 lg:px-6">
-                {/* Charts. */}
-                {children}
+    <ClerkProvider>
+      <SidebarProvider className="no-print">
+        <AppSidebar variant="inset" />
+        <SidebarInset>
+          <SiteHeader />
+          <div className="flex flex-1 flex-col">
+            <div className="@container/main flex flex-1 flex-col gap-2">
+              <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+                {/* Section cards, etc. */}
+                <div className="px-4 lg:px-6">
+                  {/* Charts. */}
+                  {children}
+                </div>
+                {/* Datatable */}
               </div>
-              {/* Datatable */}
             </div>
           </div>
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
+        </SidebarInset>
+      </SidebarProvider>
+    </ClerkProvider>
   );
 }
