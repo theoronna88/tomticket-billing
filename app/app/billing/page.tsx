@@ -15,11 +15,11 @@ import {
   SelectValue,
 } from "@/app/_components/ui/select";
 import { useEffect, useState } from "react";
-import { buscarClientes } from "@/app/_actions/actions";
+import { buscarClientes, buscarMetadatosUsuario } from "@/app/_actions/actions";
 import CalendarComponent from "@/app/_components/calendar-component";
 import { Button } from "@/app/_components/ui/button";
 import { Label } from "@/app/_components/ui/label";
-import { Cliente, Fatura } from "@/app/types";
+import { Cliente, Fatura, UserPublicMetadata } from "@/app/types";
 import { gerarFatura } from "@/app/_actions/actions";
 import BillingTemplate from "@/app/_components/billing-template/page";
 
@@ -30,6 +30,9 @@ const Billing = () => {
   const [openEnd, setOpenEnd] = useState(false);
   const [endDate, setEndDate] = useState<Date | undefined>(undefined);
   const [selectedCliente, setSelectedCliente] = useState<Cliente | null>(null);
+  const [metadata, setMetadata] = useState<UserPublicMetadata>(
+    {} as UserPublicMetadata
+  );
   const [selectedStringCliente, setSelectedStringCliente] = useState<
     string | null
   >(null);
@@ -37,9 +40,25 @@ const Billing = () => {
 
   useEffect(() => {
     async function fetchData() {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
       const response: Cliente[] = await buscarClientes();
-
+      const userPublicMetadata = await buscarMetadatosUsuario();
+      if (!userPublicMetadata) {
+        setMetadata({
+          tomTicketApiToken: "",
+          empresaNome: "",
+          cnpj: "",
+          endereco: "",
+          cidade: "",
+          estado: "",
+          cep: "",
+          telefone: "",
+          email: "",
+          site: "",
+          imageLogoUrl: "",
+        });
+      } else {
+        setMetadata(userPublicMetadata);
+      }
       setClientes(
         response || [
           {
@@ -160,6 +179,7 @@ const Billing = () => {
             startDate={startDate}
             endDate={endDate}
             cliente={selectedCliente}
+            metadata={metadata}
           />
         </>
       )}

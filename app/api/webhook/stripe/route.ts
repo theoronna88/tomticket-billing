@@ -44,8 +44,7 @@ export const POST = async (request: Request) => {
         },
       });
     }
-
-    case "customer.subscription.updated": {
+    case "customer.subscription.deleted": {
       const subscription = await stripe.subscriptions.retrieve(
         event.data.object.id
       );
@@ -58,6 +57,37 @@ export const POST = async (request: Request) => {
         privateMetadata: {
           stripeCustomerId: null,
           stripeSubscriptionId: null,
+          tomTicketApiToken: null,
+        },
+      });
+      break;
+    }
+
+    case "customer.subscription.updated": {
+      const subscription = await stripe.subscriptions.retrieve(
+        event.data.object.id
+      );
+      const clerkuserId = subscription.metadata.clerk_user_id;
+      const client = await clerkClient();
+      await client.users.updateUser(clerkuserId, {
+        publicMetadata: {
+          subscriptionPlan: null,
+          tomTicketApiToken: null,
+          empresaNome: null,
+          cnpj: null,
+          endereco: null,
+          cidade: null,
+          estado: null,
+          cep: null,
+          telefone: null,
+          email: null,
+          site: null,
+          imageLogoUrl: null,
+        },
+        privateMetadata: {
+          stripeCustomerId: null,
+          stripeSubscriptionId: null,
+          tomTicketApiToken: null,
         },
       });
       break;
