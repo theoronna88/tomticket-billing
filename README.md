@@ -286,21 +286,18 @@ npm start
 
 ---
 
-## 📞 Contact / Contato
-
-**Kast Soluções**  
-📧 Email: willian@kastsolucoes.com.br  
-🌐 Website: kastsolucoes.com.br  
-📞 Phone: (61) 4102-9696
+## 📞 Contato / Contact
+**Ronna Tecnologia** 📧 Email: theo@ronna.com.br  
+📞 Phone: +55 (61) 99915-2669
 
 ---
 
-## 📄 License / Licença
+## 📄 Licença / License
 
-Este projeto é proprietário da Kast Soluções.  
-This project is proprietary to Kast Soluções.
+Este projeto é proprietário da Ronna Tecnologia. Todos os direitos reservados.
+This project is proprietary to Ronna Tecnologia. All rights reserved.
 
 ---
 
-**Desenvolvido com ❤️ por Kast Soluções**  
-**Developed with ❤️ by Kast Soluções**
+**Desenvolvido com ❤️ para Kast Soluções**  
+**Developed with ❤️ to Kast Soluções**
