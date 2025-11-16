@@ -72,6 +72,17 @@ export const POST = async (request: Request) => {
       await client.users.updateUser(clerkuserId, {
         publicMetadata: {
           subscriptionPlan: null,
+          tomTicketApiToken: null,
+          empresaNome: null,
+          cnpj: null,
+          endereco: null,
+          cidade: null,
+          estado: null,
+          cep: null,
+          telefone: null,
+          email: null,
+          site: null,
+          imageLogoUrl: null,
         },
         privateMetadata: {
           stripeCustomerId: null,

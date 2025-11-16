@@ -8,7 +8,7 @@ const buscarToken = async () => {
   const { userId } = await auth();
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/tomticket/get-token?clerkId=${userId}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/custom-settings/get-token?clerkId=${userId}`,
     {
       method: "GET",
       headers: {
