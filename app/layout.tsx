@@ -25,6 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <script async src="https://js.stripe.com/v3/buy-button.js"></script>
       <ClerkProvider>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
