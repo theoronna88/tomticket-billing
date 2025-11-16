@@ -1,5 +1,29 @@
+"use server";
+
+import { auth } from "@clerk/nextjs/server";
+
 const baseUrl = process.env.TOMTICKET_API_URL;
-const apiKey = process.env.TOMTICKET_API_KEY;
+
+const buscarToken = async () => {
+  const { userId } = await auth();
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/tomticket/get-token?clerkId=${userId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch token");
+  }
+
+  const data = await response.json();
+  return data.tomTicketApiToken;
+};
 
 export const buscarClientes = async () => {
   const clientes = [];
@@ -15,7 +39,7 @@ export const buscarClientes = async () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
+          Authorization: `Bearer ${await buscarToken()}`,
         },
       }
     );
@@ -47,7 +71,7 @@ export const buscarChamadosPorClienteIdEStartDateEndDate = async (
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
+          Authorization: `Bearer ${await buscarToken()}`,
         },
       }
     );
@@ -80,7 +104,7 @@ export const buscarDetalhesChamadoPorId = async (chamadoId) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${await buscarToken()}`,
       },
     }
   );
