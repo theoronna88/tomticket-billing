@@ -8,39 +8,14 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "./ui/sidebar";
-import {
-  CogIcon,
-  DollarSignIcon,
-  HomeIcon,
-  LayoutTemplateIcon,
-} from "lucide-react";
 import NavMain from "./nav-main";
+import { data } from "./sidebar-items";
+import { HomeIcon } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 
 const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
-  const data = {
-    navMain: [
-      {
-        title: "Dashboard",
-        href: "/app",
-        icon: HomeIcon,
-      },
-      {
-        title: "Settings",
-        href: "/app/settings",
-        icon: CogIcon,
-      },
-      {
-        title: "Templates",
-        href: "/app/templates",
-        icon: LayoutTemplateIcon,
-      },
-      {
-        title: "Gerar Fatura",
-        href: "/app/billing",
-        icon: DollarSignIcon,
-      },
-    ],
-  };
+  const { user } = useUser();
+  const hasAPlan = user?.publicMetadata.subscriptionPlan == "paid";
 
   return (
     <Sidebar collapsible="offcanvas" {...props} className="no-print">
@@ -49,7 +24,7 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:p-1.5!"
+              className={"data-[slot=sidebar-menu-button]:p-1.5!"}
             >
               <Link href="/app">
                 <HomeIcon className="size-5" />
@@ -60,7 +35,7 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={data.navMain} hasAPlan={hasAPlan} />
       </SidebarContent>
     </Sidebar>
   );

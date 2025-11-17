@@ -1,29 +1,27 @@
-import Link from "next/link";
-import { Button } from "./ui/button";
+import { auth } from "@clerk/nextjs/server";
 import { Separator } from "./ui/separator";
 import { SidebarTrigger } from "./ui/sidebar";
+import { UserButton } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
-const SiteHeader = () => {
+const SiteHeader = async () => {
+  const { userId } = await auth();
+
+  if (!userId) {
+    redirect("/");
+  }
+
   return (
     <header className="not-print flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height) print:hidden">
-      <div className="flex w-full items-center gap-1 px-4 lg:gap-2 lg:px-6">
+      <div className="flex w-full items-center gap-1 px-4 lg:gap-2 lg:px-6 py-4">
         <SidebarTrigger className="-ml-1" />
         <Separator
           orientation="vertical"
           className="mx-2 data-[orientation=vertical]:h-4"
         />
-        <h1 className="text-base font-medium">Documents</h1>
+        <h1 className="text-base font-medium">{/* Title */}</h1>
         <div className="ml-auto flex items-center gap-2">
-          <Button variant="ghost" asChild size="sm" className="hidden sm:flex">
-            <Link
-              href="https://github.com/shadcn-ui/ui/tree/main/apps/v4/app/(examples)/dashboard"
-              rel="noopener noreferrer"
-              target="_blank"
-              className="dark:text-foreground"
-            >
-              GitHub
-            </Link>
-          </Button>
+          <UserButton showName={true} />
         </div>
       </div>
     </header>

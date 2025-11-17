@@ -1,12 +1,19 @@
 import AppSidebar from "../_components/app-sidebar";
 import SiteHeader from "../_components/site-header";
 import { SidebarInset, SidebarProvider } from "../_components/ui/sidebar";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-export default function Layout({
+export default async function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { userId } = await auth();
+  if (!userId) {
+    redirect("/");
+  }
+
   return (
     <SidebarProvider className="no-print">
       <AppSidebar variant="inset" />

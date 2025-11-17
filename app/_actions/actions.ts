@@ -1,14 +1,26 @@
 "use server";
 
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import {
   buscarClientes as buscarClientesAPI,
   buscarChamadosPorClienteIdEStartDateEndDate,
   buscarDetalhesChamadoPorId,
 } from "../api/api";
-import { Cliente } from "../types";
+import { Cliente, UserPublicMetadata } from "../types";
 
 export const buscarClientes = async () => {
   return await buscarClientesAPI();
+};
+
+export const buscarMetadatosUsuario = async () => {
+  const { userId } = await auth();
+  const clerk = await clerkClient();
+  const user = await clerk.users.getUser(userId!);
+
+  if (!userId) {
+    throw new Error("Usuário não autenticado");
+  }
+  return user.publicMetadata as unknown as UserPublicMetadata;
 };
 
 export const converterData = async (date: Date | undefined) => {

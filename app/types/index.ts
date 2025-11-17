@@ -49,3 +49,17 @@ export interface Fatura {
     name: string | null;
   };
 }
+
+export interface UserPublicMetadata {
+  tomTicketApiToken: string;
+  empresaNome: string;
+  cnpj: string;
+  endereco: string;
+  cidade: string;
+  estado: string;
+  cep: string;
+  telefone: string;
+  email: string;
+  site: string;
+  imageLogoUrl: string;
+}
