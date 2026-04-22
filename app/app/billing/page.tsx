@@ -31,7 +31,7 @@ const Billing = () => {
   const [endDate, setEndDate] = useState<Date | undefined>(undefined);
   const [selectedCliente, setSelectedCliente] = useState<Cliente | null>(null);
   const [metadata, setMetadata] = useState<UserPublicMetadata>(
-    {} as UserPublicMetadata
+    {} as UserPublicMetadata,
   );
   const [selectedStringCliente, setSelectedStringCliente] = useState<
     string | null
@@ -75,7 +75,7 @@ const Billing = () => {
             creation_date: "",
             custom_fields: [],
           },
-        ]
+        ],
       );
     }
     fetchData();
@@ -132,7 +132,7 @@ const Billing = () => {
                     clientes.map((cliente, idx) => (
                       <SelectItem
                         key={cliente.id ?? `cliente-${idx}`}
-                        value={cliente.id ?? ""}
+                        value={cliente.id ?? "Selecione o cliente"}
                       >
                         {cliente.name}
                       </SelectItem>
