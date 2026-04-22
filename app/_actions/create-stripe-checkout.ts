@@ -13,7 +13,7 @@ export const createStripeCheckout = async () => {
     throw new Error("Chave secreta do Stripe não definida");
   }
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: "2025-10-29.clover",
+    apiVersion: "2026-03-25.dahlia",
   });
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
