@@ -14,7 +14,7 @@ export const POST = async (request: Request) => {
     return NextResponse.error();
   }
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-    apiVersion: "2025-10-29.clover",
+    apiVersion: "2026-03-25.dahlia",
   });
   if (!process.env.STRIPE_WEBHOOK_SECRET) {
     return NextResponse.error();
@@ -22,7 +22,7 @@ export const POST = async (request: Request) => {
   const event = stripe.webhooks.constructEvent(
     text,
     signature,
-    process.env.STRIPE_WEBHOOK_SECRET
+    process.env.STRIPE_WEBHOOK_SECRET,
   );
 
   switch (event.type) {
@@ -46,7 +46,7 @@ export const POST = async (request: Request) => {
     }
     case "customer.subscription.deleted": {
       const subscription = await stripe.subscriptions.retrieve(
-        event.data.object.id
+        event.data.object.id,
       );
       const clerkuserId = subscription.metadata.clerk_user_id;
       const client = await clerkClient();
@@ -65,7 +65,7 @@ export const POST = async (request: Request) => {
 
     case "customer.subscription.updated": {
       const subscription = await stripe.subscriptions.retrieve(
-        event.data.object.id
+        event.data.object.id,
       );
       const clerkuserId = subscription.metadata.clerk_user_id;
       const client = await clerkClient();
